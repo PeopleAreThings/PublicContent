@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <style>
+            body, html { 
+                height: 100%; 
+                overflow: hidden; 
+                padding: 0; 
+                margin: 0; 
+            }
+
+            .page {
+              top: 0; 
+              left: 0; 
+              width: 100%; 
+              min-height: 100%; 
+              position: absolute; 
+              display: none; 
+              overflow: hidden;
+              border: 0;
+            }
+
+            .currentPage { 
+              display: block; 
+            }
+
+            .full {
+                display:block;
+                height: 100vh;
+                width: 100vw;
+                object-fit: cover;
+                object-position: top;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var TIME_PER_PAGE = 30000;
+            window.onload = function() {
+                var pages = document.querySelectorAll('.page');
+                var numPages = pages.length;
+                var i = -1;
+        
+                function nextPage() {
+                    if (i >= 0) {
+                        pages[i].classList.remove('currentPage');
+                    }
+        
+                    i++;
+        
+                    if (i >= numPages) {
+                        i = 0;  // Loop back to the first page
+                    }
+        
+                    pages[i].classList.add('currentPage');
+        
+                    setTimeout(nextPage, TIME_PER_PAGE);
+                }
+        
+                nextPage();
+            };
+        </script>
+
+        <div class="page"><img class="full" src="1.png" alt="1"></div>
+    </body>
+    </html>
